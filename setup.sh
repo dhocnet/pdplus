@@ -152,16 +152,16 @@ SETUP_SELECT () {
     2) Penuh tanpa X - dl: 851MB/inst: 5.8GB+
     "
     read -p 'Pilihan (default: 1) [1/2]: ' pilih_tipe
+    if [ ! -d $PKGTMP ]
+    then
+        mkdir -p $PKGTMP
+        if [ ! -d $SETUP ]
+        then
+            mkdir -p $SETUP
+        fi
+    fi
     if [ $pilih_tipe = "2" ]
     then
-        if [ ! -d $PKGTMP ]
-        then
-            mkdir -p $PKGTMP
-            if [ ! -d $SETUP ]
-            then
-                mkdir -p $SETUP
-            fi
-        fi
         INSTALL_DEVEL
     else
         INSTALL_DEFAULT
@@ -192,10 +192,10 @@ INSTALL_DEFAULT () {
 INSTALL_DEVEL () {
     clear
     PKG_DEVDIR="a ap d e l n t"
-    echo "Mengunduh program installer: upgradepkg, removepkg"
-    wget -c -t 0 -P $SETUP/ -q --show-progress $INSTALLPKG_DL/{removepkg,upgradepkg}
+    echo "Mengunduh program installer: installpkg, upgradepkg, removepkg"
+    wget -c -t 0 -P $SETUP/ -q --show-progress $INSTALLPKG_DL/{installpkg,removepkg,upgradepkg}
     echo "OK.\n\nMengunduh paket penuh:"
-    chmod +x $SETUP/{removepkg,upgradepkg}
+    chmod +x $SETUP/{installpkg,removepkg,upgradepkg}
     sleep 1
     for PKG_DEVDL in $PKG_DEVDIR ; do
         wget -c -t 0 -r -np -nd -q --show-progress -T 10 -w 5 -A '.txz' -P $PKGTMP $PKGURI/slackware/$PKG_DEVDL/
