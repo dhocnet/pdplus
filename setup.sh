@@ -246,13 +246,13 @@ SETUP_RESUME(){
     2 - Hapus Slackware
     3 - Keluar\n"
   
-    read -p "Pilihanmu [1,2 atau 3] (default 3)?" mau_apa
-    if [ $mau_apa = "1"]
+    read -p "Pilihanmu [1,2 atau 3] (default 3)? " mau_apa
+    if [ $mau_apa = "1" ]
     then
         echo "Menghapus instalasi lama ..."
         rmdir -vrf $SLACKWARE
         SETUP_MULAI
-    elif [ $mau_apa = "2"]
+    elif [ $mau_apa = "2" ]
     then
         echo "Menghapus instalasi Slackware ..."
         rmdir -vrf $SLACKWARE
