@@ -259,6 +259,7 @@ SETUP_RESUME(){
         echo "Slackware telah dihapus!\n"
     else
         echo "Tidak ada yang dilakukan.\n"
+    fi
 }
 
 if [ -d $HOME/slackware ]
