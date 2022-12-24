@@ -17,7 +17,7 @@ HOME=/data/data/com.termux/files/home
 SLACKWARE=$HOME/slackware
 PKGTMP=$SLACKWARE/tmp/pkg
 SETUP=$SLACKWARE/tmp/setup
-PKGURI=http://mirrors.slackware.bg/slackwarearm/slackwarearm-current
+PKGURI=https://ftp.halifax.rwth-aachen.de/slackwarearm/slackwareaarch64-current
 INSTALLPKG_DL=https://raw.githubusercontent.com/dhocnet/termux-slackwareinstall/main
 
 # MINIROOT PKG BY ALIEN BOB 
