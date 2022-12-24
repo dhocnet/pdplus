@@ -15,3 +15,5 @@ Instalasi Slackware menggunakan mode interaksi, jadi masukan input yang diperluk
 
 # VERSI YANG DIGUNAKAN
 Script ini hanya memasang Slackware aarch64 - current. Jadi pastikan jika CPU perangkat kalian mendukung sebelum menggunakan script ini.
+
+Script ini menawarkan dua jenis pemasangan, yaitu **minimal** dan **penuh**. _Minimal_ adalah instalasi Slackware _miniroot_ dan _penuh_ merupakan instalasi standard Slackware Linux tanpa GUI.
