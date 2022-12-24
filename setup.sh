@@ -268,7 +268,7 @@ CARA_PAKAI () {
 SETUP_RESUME () {
     if [ -f $SLACKWARE/tmp/setup.full ] || [ -f $SLACKWARE/tmp/setup.mini ]
     then
-        echo "Lanjutkan instalasi yang terhenti?\n"
+        echo "\nLanjutkan instalasi yang terhenti?\n"
         read -p "Ya/ Tidak (default N) [y/N]? " lanjutkah
         if [ $lanjutkah = "y" ]
         then
