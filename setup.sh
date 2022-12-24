@@ -250,12 +250,12 @@ SETUP_RESUME(){
     if [ $mau_apa = "1" ]
     then
         echo "Menghapus instalasi lama ..."
-        rmdir -vrf $SLACKWARE
+        rm -vrf $SLACKWARE
         SETUP_MULAI
     elif [ $mau_apa = "2" ]
     then
         echo "Menghapus instalasi Slackware ..."
-        rmdir -vrf $SLACKWARE
+        rm -vrf $SLACKWARE
         echo "Slackware telah dihapus!\n"
     else
         echo "Tidak ada yang dilakukan.\n"
