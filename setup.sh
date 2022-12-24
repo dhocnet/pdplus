@@ -17,95 +17,99 @@ HOME=/data/data/com.termux/files/home
 SLACKWARE=$HOME/slackware
 PKGTMP=$SLACKWARE/tmp/pkg
 SETUP=$SLACKWARE/tmp/setup
-PKGURI="https://mirrors.slackware.com/slackwarearm/slackware-curent"
-INSTALLPKG_DL="https://github.com/dhocnet/termux-slackwareinstall/raw/master"
+PKGURI=http://mirrors.slackware.bg/slackwarearm/slackwarearm-current
+INSTALLPKG_DL=https://raw.githubusercontent.com/dhocnet/termux-slackwareinstall/main
 
 # MINIROOT PKG BY ALIEN BOB 
-PKG_MINI="a/aaa_base
-a/aaa_elflibs
-a/aaa_terminfo
-a/acl
-a/attr
-a/bash
-a/tar
-a/bin
-a/btrfs-progs
-a/bzip2
-a/coreutils
-a/dbus
-a/dcron
-a/devs
-a/dialog
-a/e2fsprogs
-a/ed
-a/etc
-a/file
-a/findutils
-a/hostname
-a/hwdata
-a/lbzip2
-a/less
-a/gawk
-a/gettext
-a/getty-ps
-a/glibc-solibs
-a/glibc-zoneinfo
-a/gptfdisk
-a/grep
-a/gzip
-a/jfsutils
-a/inotify-tools
-a/kmod
-a/lrzip
-a/lzip
-a/lzlib
-a/pkgtools
-a/procps-ng
-a/reiserfsprogs
-a/shadow
-a/sed
-a/sysklogd
-a/usbutils
-a/util-linux
-a/which
-a/xfsprogs
-a/xz
-ap/groff
-ap/man-db
-ap/man-pages
-ap/nano
-ap/slackpkg
-d/perl
-d/python
-d/python-pip
-d/python-setuptools
-n/openssl
-n/ca-certificates
-n/gnupg
-n/lftp
-n/libmnl
-n/network-scripts
-n/nfs-utils
-n/ntp
-n/iputils
-n/net-tools
-n/iproute2
-n/openssh
-n/rpcbind
-n/libtirpc
-n/rsync
-n/telnet
-n/traceroute
-n/wget
-n/wpa_supplicant
-n/wireless-tools
-l/lzo
-l/libnl3
-l/libidn
-l/libunistring
-l/mpfr
-l/ncurses
-l/pcre"
+CATA="aaa_base
+aaa_elflibs
+aaa_terminfo
+acl
+attr
+bash
+tar
+bin
+btrfs-progs
+bzip2
+coreutils
+dbus
+dcron
+devs
+dialog
+e2fsprogs
+ed
+etc
+file
+findutils
+hostname
+hwdata
+lbzip2
+less
+gawk
+gettext
+getty-ps
+glibc-solibs
+glibc-zoneinfo
+gptfdisk
+grep
+gzip
+jfsutils
+inotify-tools
+kmod
+lrzip
+lzip
+lzlib
+pkgtools
+procps-ng
+reiserfsprogs
+shadow
+sed
+sysklogd
+usbutils
+util-linux
+which
+xfsprogs
+xz"
+
+CATAP="groff
+aman-db
+man-pages
+nano
+slackpkg"
+
+CATD="perl
+python
+python-pip
+python-setuptools"
+
+CATN="openssl
+ca-certificates
+gnupg
+lftp
+libmnl
+network-scripts
+nfs-utils
+ntp
+iputils
+net-tools
+iproute2
+openssh
+rpcbind
+libtirpc
+rsync
+telnet
+traceroute
+wget
+wpa_supplicant
+wireless-tools"
+
+CATL="lzo
+libnl3
+libidn
+libunistring
+mpfr
+ncurses
+pcre"
 
 SETUP_MULAI () {
     clear
@@ -139,7 +143,7 @@ SETUP_BATAL () {
 SETUP_TERMUX () {
     clear
     echo "Menginstal program yang dibutuhkan ...\n"
-    apt -y upgrade && apt -y install grep coreutils lzip proot tar wget util-linux dialog
+    pkg upgrade && pkg install grep coreutils lzip proot tar wget util-linux dialog
     sleep 1
     SETUP_SELECT
 }
@@ -174,13 +178,31 @@ INSTALL_DEFAULT () {
     wget -c -t 0 -P $SETUP/ -q --show-progress $INSTALLPKG_DL/installpkg
     chmod +x $SETUP/installpkg
     echo "OK.\n"
-    echo "Mengunduh paket dasar miniroot:"
+    echo "Mengunduh paket minimal:"
     sleep 1
-    for PKG_TODL in $PKG_MINI ; do
-        wget -c -t 0 -T 10 -w 5 -P $PKGTMP -q --show-progress $PKGURI/slackware/$PKG_TODL-*.txz
+    PKG_MIN="a ap d n l"
+    for PKG_CAT in $PKG_MIN ; do
+        if [ $PKG_CAT = "a" ]
+        then
+	    PKGDL=$CATA
+        elif [ $PKG_CAT = "ap" ]
+        then
+            PKGDL=$CATAP
+        elif [ $PKG_CAT = "d" ]
+        then
+            PKGDL=$CATD
+        elif [ $PKG_CAT = "n" ]
+        then
+            PKGDL=$CATN
+        else
+            PKGDL=$CATL
+        fi
+        for PKG_TODL in $PKGDL ; do
+            wget -c -t 0 -T 10 -w 5 -P $PKGTMP/ -q --show-progress -r -np -nd -A "$PKG_TODL,txz" $PKGURI/slackware/$PKG_CAT/
+        done
     done
     echo "OK.\n"
-    echo "Memasang sistem dasar Slackware miniroot ..."
+    echo "Memasang sistem dasar Slackware ..."
     sleep 2
     # buang pesan error yang timbul karena perintah perintah dari installscript doinst.sh
     # biasanya masalah yang timbul karena kesalahan chown fulan.binfulan atau perintah chroot
@@ -198,7 +220,7 @@ INSTALL_DEVEL () {
     chmod +x $SETUP/{installpkg,removepkg,upgradepkg}
     sleep 1
     for PKG_DEVDL in $PKG_DEVDIR ; do
-        wget -c -t 0 -r -np -nd -q --show-progress -T 10 -w 5 -A '.txz' -P $PKGTMP $PKGURI/slackware/$PKG_DEVDL/
+        wget -c -t 0 -np -nd -q --show-progress -T 10 -w 5 -r -l 1 -A "txz" -P $PKGTMP/ $PKGURI/slackware/$PKG_DEVDL/
     done
     echo "OK.\n\nMemasang paket penuh:"
     sleep 1
@@ -236,11 +258,11 @@ CARA_PAKAI () {
 }
 
 clear
-echo "\nSlackware ARM - NetInstall\n-> https://github.com/dhocnet/termux-slackwareinstall/"
+echo "\nSlackware-current AARCH64 - NetInstall\n-> https://github.com/dhocnet/termux-slackwareinstall/"
 sleep 2
 
 SETUP_RESUME(){
-    echo "Slackware sudah ada! Apa yang mau dilakukan?
+    echo "\nSlackware sudah ada! Apa yang mau dilakukan?
   
     1 - Install ulang
     2 - Hapus Slackware
@@ -249,16 +271,20 @@ SETUP_RESUME(){
     read -p "Pilihanmu [1,2 atau 3] (default 3)? " mau_apa
     if [ $mau_apa = "1" ]
     then
-        echo "Menghapus instalasi lama ..."
+        echo "\nMenghapus instalasi lama ..."
         rm -vrf $SLACKWARE
+        rm -v $HOME/../usr/bin/slackwarego
+        sleep 2
         SETUP_MULAI
     elif [ $mau_apa = "2" ]
     then
-        echo "Menghapus instalasi Slackware ..."
+        echo "\nMenghapus instalasi Slackware ..."
         rm -vrf $SLACKWARE
-        echo "Slackware telah dihapus!\n"
+        rm -v $HOME/../usr/bin/slackwarego
+        echo "\nSlackware telah dihapus!\n"
+        sleep 2
     else
-        echo "Tidak ada yang dilakukan.\n"
+        echo "\nTidak ada yang dilakukan.\n"
     fi
 }
 
