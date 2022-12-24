@@ -2,6 +2,7 @@
 
 unset LD_PRELOAD
 proot \
+    -k 6.1.1 \
     --link2symlink \
     -0 \
     -r $HOME/slackware \
