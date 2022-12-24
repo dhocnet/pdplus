@@ -270,7 +270,7 @@ SETUP_RESUME () {
     then
         echo "Lanjutkan instalasi yang terhenti?\n"
         read -p "Ya/ Tidak (default N) [y/N]? " lanjutkah
-        if [ $lanjutkah = "y"]
+        if [ $lanjutkah = "y" ]
         then
             if [ -f $SLACKWARE/tmp/setup.full ]
             then
