@@ -153,7 +153,7 @@ SETUP_SELECT () {
     echo "PILIH JENIS INSTALASI
     
     1) Minimalis - Download 76MB+/inst: 350MB+
-    2) Penuh tanpa X - Download: 1024MB+/inst: 5.8GB+
+    2) Penuh tanpa X - Download: 1.2GB+/inst: 7.7GB+
     "
     read -p 'Pilihan (default: 1) [1/2]: ' pilih_tipe
     if [ ! -d $PKGTMP ]
