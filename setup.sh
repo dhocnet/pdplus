@@ -116,7 +116,7 @@ SETUP_MULAI () {
     # konfirmasi instalasi paket yang dibutuhkan oleh slackware
     # pkgtools
     echo "Anda membutuhkan beberapa program lain untuk
-menyelesaikan instalasi Slackware-current ARM. Yaitu:
+menyelesaikan instalasi Slackware. Yaitu:
 
     1) wget
     2) coreutils
@@ -152,8 +152,8 @@ SETUP_SELECT () {
     clear
     echo "PILIH JENIS INSTALASI
     
-    1) Minimalis - dl: 76MB/inst: 350MB+
-    2) Penuh tanpa X - dl: 851MB/inst: 5.8GB+
+    1) Minimalis - Download 76MB+/inst: 350MB+
+    2) Penuh tanpa X - Download: 1024MB+/inst: 5.8GB+
     "
     read -p 'Pilihan (default: 1) [1/2]: ' pilih_tipe
     if [ ! -d $PKGTMP ]
@@ -178,6 +178,7 @@ SETUP_SELECT () {
 
 INSTALL_DEFAULT () {
     clear
+    touch $SLACKWARE/tmp/setup.mini
     echo "Mengunduh paket minimal:"
     sleep 1
     PKG_MIN="a ap d n l"
@@ -209,6 +210,7 @@ INSTALL_DEFAULT () {
 
 INSTALL_DEVEL () {
     clear
+    touch $SLACKWARE/tmp/setup.full
     PKG_DEVDIR="a ap d e l n t"
     echo "Mengunduh paket penuh:"
     sleep 1
@@ -233,11 +235,22 @@ INSTALL_STATER () {
     wget -c -q --show-progress -P $HOME/../usr/bin/ $INSTALLPKG_DL/slackwarego
     chmod +x $HOME/../usr/bin/slackwarego
     echo "nameserver 8.8.8.8" > $SLACKWARE/etc/resolv.conf
-    echo "Membersihkan sisa-sisa instalasi ..."
-    sleep 1
-    rm -vrf $SLACKWARE/tmp/*
-    echo "OK ..."
-    sleep 1
+    if [ -f $SLACKWARE/tmp/setup.full ]
+    then
+        rm $SLACKWARE/tmp/setup.full
+    else
+        rm $SLACKWARE/tmp/setup.mini
+    fi
+    echo "Bersihkan paket yang di download?"
+    read -p "Ya/ Tidak (default N) [y/N]? " hapus_tmp
+    if [ $hapus_tmp = "y" ]
+    then
+        echo "Membersihkan paket sementara ..."
+        sleep 1
+        rm -vrf $SLACKWARE/tmp/*
+        echo "OK ..."
+        sleep 1
+    fi
     CARA_PAKAI
 }
 
@@ -252,11 +265,28 @@ CARA_PAKAI () {
     Untuk menjalankan, gunakan perintah: slackwarego\n"
 }
 
-clear
-echo "\nSlackware-current AARCH64 - NetInstall\n-> https://github.com/dhocnet/termux-slackwareinstall/"
-sleep 2
+SETUP_RESUME () {
+    if [ -f $SLACKWARE/tmp/setup.full ] || [ -f $SLACKWARE/tmp/setup.mini ]
+    then
+        echo "Lanjutkan instalasi yang terhenti?\n"
+        read -p "Ya/ Tidak (default N) [y/N]? " lanjutkah
+        if [ $lanjutkah = "y"]
+        then
+            if [ -f $SLACKWARE/tmp/setup.full ]
+            then
+                INSTALL_DEVEL
+            else
+                INSTALL_DEFAULT
+            fi
+        else
+            INSTALL_ULANG
+        fi
+    else
+        INSTALL_ULANG
+    fi
+}
 
-SETUP_RESUME(){
+INSTALL_ULANG () {
     echo "\nSlackware sudah ada! Apa yang mau dilakukan?
   
     1 - Install ulang
@@ -282,6 +312,10 @@ SETUP_RESUME(){
         echo "\nTidak ada yang dilakukan.\n"
     fi
 }
+
+clear
+echo "\nSlackware-current AARCH64 - NetInstall\n-> https://github.com/dhocnet/termux-slackwareinstall/"
+sleep 2
 
 if [ -d $HOME/slackware ]
 then
