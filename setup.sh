@@ -164,6 +164,10 @@ SETUP_SELECT () {
             mkdir -p $SETUP
         fi
     fi
+    echo "\nMengunduh program installer:"
+    wget -c -t 0 -P $SETUP/ -q --show-progress $INSTALLPKG_DL/installpkg
+    chmod +x $SETUP/installpkg
+    echo "OK.\n"
     if [ $pilih_tipe = "2" ]
     then
         INSTALL_DEVEL
@@ -174,10 +178,6 @@ SETUP_SELECT () {
 
 INSTALL_DEFAULT () {
     clear
-    echo "Mengunduh program installer: installpkg"
-    wget -c -t 0 -P $SETUP/ -q --show-progress $INSTALLPKG_DL/installpkg
-    chmod +x $SETUP/installpkg
-    echo "OK.\n"
     echo "Mengunduh paket minimal:"
     sleep 1
     PKG_MIN="a ap d n l"
@@ -198,34 +198,31 @@ INSTALL_DEFAULT () {
             PKGDL=$CATL
         fi
         for PKG_TODL in $PKGDL ; do
-            wget -c -t 0 -T 10 -w 5 -P $PKGTMP/ -q --show-progress -r -np -nd -A "$PKG_TODL,txz" $PKGURI/slackware/$PKG_CAT/
+            wget -c -t 0 -T 10 -w 5 -P $PKGTMP/ -q --show-progress -r -np -nd -A "$PKG_TODL-*.txz" $PKGURI/slackware/$PKG_CAT/
         done
     done
     echo "OK.\n"
-    echo "Memasang sistem dasar Slackware ..."
+    echo "Memasang Slackware minimal ..."
     sleep 2
-    # buang pesan error yang timbul karena perintah perintah dari installscript doinst.sh
-    # biasanya masalah yang timbul karena kesalahan chown fulan.binfulan atau perintah chroot
-    # yang tidak terdapat pada termux environment
-    $SETUP/installpkg --terse --root $SLACKWARE/ $PKGTMP/*.txz 2> /dev/null
-    INSTALL_STATER
+    INSTALL_PAKET
 }
 
 INSTALL_DEVEL () {
     clear
     PKG_DEVDIR="a ap d e l n t"
-    echo "Mengunduh program installer: installpkg, upgradepkg, removepkg"
-    wget -c -t 0 -P $SETUP/ -q --show-progress $INSTALLPKG_DL/{installpkg,removepkg,upgradepkg}
-    echo "OK.\n\nMengunduh paket penuh:"
-    chmod +x $SETUP/{installpkg,removepkg,upgradepkg}
+    echo "Mengunduh paket penuh:"
     sleep 1
     for PKG_DEVDL in $PKG_DEVDIR ; do
         wget -c -t 0 -np -nd -q --show-progress -T 10 -w 5 -r -l 1 -A "txz" -P $PKGTMP/ $PKGURI/slackware/$PKG_DEVDL/
     done
-    echo "OK.\n\nMemasang paket penuh:"
+    echo "OK.\n\nMemasang Slackware penuh ..."
     sleep 1
-    $SETUP/upgradepkg --install-new $PKGTMP/*.txz 2> /dev/null
-    echo "\n\nInstalasi paket penuh selesai.\nFinishing ..."
+    INSTALL_PAKET
+}
+
+INSTALL_PAKET () {
+    $SETUP/installpkg --terse --root $SLACKWARE/ $PKGTMP/*.txz 2> /dev/null
+    echo "\n\nInstalasi Slackware selesai ..."
     sleep 1
     INSTALL_STATER
 }
@@ -236,8 +233,6 @@ INSTALL_STATER () {
     wget -c -q --show-progress -P $HOME/../usr/bin/ $INSTALLPKG_DL/slackwarego
     chmod +x $HOME/../usr/bin/slackwarego
     echo "nameserver 8.8.8.8" > $SLACKWARE/etc/resolv.conf
-    echo "OK ..."
-    clear
     echo "Membersihkan sisa-sisa instalasi ..."
     sleep 1
     rm -vrf $SLACKWARE/tmp/*
