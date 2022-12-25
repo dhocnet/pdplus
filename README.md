@@ -14,6 +14,8 @@ $ bash setup.sh
 Instalasi Slackware menggunakan mode interaksi, jadi masukan input yang diperlukan lalu tunggu hingga proses selesai.
 
 # VERSI YANG DIGUNAKAN
-Script ini hanya memasang Slackware aarch64 - current. Jadi pastikan jika CPU perangkat kalian mendukung sebelum menggunakan script ini.
+Untuk sementara script ini baru mendukung Slackware aarch64 current. Dukungan untuk versi stabil akan ditambahkan nanti.
 
-Script ini menawarkan dua jenis pemasangan, yaitu **minimal** dan **penuh**. _Minimal_ adalah instalasi Slackware _miniroot_ dan _penuh_ merupakan instalasi standard Slackware Linux tanpa GUI.
+Sedangkan jenis instalasi terbagi menjadi dua, yaitu *Minimal* dan *Penuh*. Dimana **Minimal** hanya memasang paket seperlunya saja hanya agar sistem dasar dapat berjalan yang biasanya disebut dengan **miniroot**. Paket yang diunduh pada instalasi minimal hanya kurang dari 100MB.
+
+Sedangkan instalasi *Penuh* akan memasang keseluruhan paket dalam distribusi standard Slackware Linux kecuali dukungan untuk GUI. Jenis instalasi ini perlu mengunduh 1.5GB lebih paket binari dan memakan ruang 7GB lebih setelah instalasi.
