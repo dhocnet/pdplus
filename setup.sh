@@ -290,8 +290,9 @@ INSTALL_ULANG () {
     echo "\nSlackware sudah ada! Apa yang mau dilakukan?
   
     1 - Install ulang
-    2 - Hapus Slackware
-    3 - Keluar\n"
+    2 - Perbaiki sistem
+    3 - Hapus Slackware
+    4 - Keluar\n"
   
     read -p "Pilihanmu [1,2 atau 3] (default 3)? " mau_apa
     if [ $mau_apa = "1" ]
@@ -302,6 +303,16 @@ INSTALL_ULANG () {
         sleep 2
         SETUP_MULAI
     elif [ $mau_apa = "2" ]
+    then
+        echo "\nPilih jenis instalasi sebelumnya."
+        read -p "Minimal atau Penuh [M/p - default M]? " lanjut_install
+        if [ $lanjut_install = "p" ]
+            then
+                INSTALL_DEVEL
+        else
+            INSTALL_DEFAULT
+        fi
+    elif [ $mau_apa = "3" ]
     then
         echo "\nMenghapus instalasi Slackware ..."
         rm -vrf $SLACKWARE
