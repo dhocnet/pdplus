@@ -1,21 +1,8 @@
-# Slackware installer untuk Termux
-Halo, ini merupakan script pemasang Slackware terbaru untuk Termux. Dengan script ini kalian dapat memasang dan menjalankan Slackware Linux pada perangkat Android melalui Termux.
+# PDPlus - Proot Distro Plus
+Hanya sebuah program pendukung yang menambah beberapa koleksi distro Linux yang dapat di pasang pada Android melalui Termux. PDPlus mendukung smartphone dengan akses __*root*__ maupun tidak.
 
-# CARA MENGGUNAKAN
-Buka Termux. Jika belum punya, install dari repository https://f-droid.org.
+# Dependensi
+PDPlus bekerja menggunakan program yang sudah ada termasuk **proot-distro**, **dialog**, dan **wget**. Khusus untuk smartphone yang telah di __*root*__, smartphone tersebut harus sudah terpasang *BusyBox* melalui pemasang modul __*root*__ manager.
 
-Pada Termux ketik:
-
-```
-$ wget https://raw.githubusercontent.com/dhocnet/termux-slackwareinstall/main/setup.sh
-$ bash setup.sh
-```
-
-Instalasi Slackware menggunakan mode interaksi, jadi masukan input yang diperlukan lalu tunggu hingga proses selesai.
-
-# VERSI YANG DIGUNAKAN
-Untuk sementara script ini baru mendukung Slackware aarch64 current. Dukungan untuk versi stabil akan ditambahkan nanti.
-
-Sedangkan jenis instalasi terbagi menjadi dua, yaitu *Minimal* dan *Penuh*. Dimana **Minimal** hanya memasang paket seperlunya saja hanya agar sistem dasar dapat berjalan yang biasanya disebut dengan **miniroot**. Paket yang diunduh pada instalasi minimal hanya kurang dari 100MB.
-
-Sedangkan instalasi *Penuh* akan memasang keseluruhan paket dalam distribusi standard Slackware Linux kecuali dukungan untuk GUI. Jenis instalasi ini perlu mengunduh 1.5GB lebih paket binari dan memakan ruang 7GB lebih setelah instalasi.
+__CATATAN!__
+__Script baru dicoba dengan smartphone yang di **root** menggunakan Magisk, dan **BusyBox** yang digunakan, adalah **BusyBox** yang dibuat untuk Magisk. Kami belum mencoba menggunakan **BusyBox** dari repository Termux.__
