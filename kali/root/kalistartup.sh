@@ -34,7 +34,7 @@ function BOOT_KALI() {
 
   # setup mount point
   export MOUNT="busybox mount"
-  su -c "$MOUNT -o remount,dev,suid /dev"
+  su -c "$MOUNT -o remount,dev,suid /data"
   su -c "$MOUNT --bind /dev $KALI_ROOT/dev"
   su -c "$MOUNT --bind /dev/pts $KALI_ROOT/dev/pts"
   su -c "$MOUNT --bind /sys $KALI_ROOT/sys"
