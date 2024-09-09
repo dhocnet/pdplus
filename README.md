@@ -1,4 +1,4 @@
-# _**PERINGATAN: PROYEK INI MASIH DALAM TAHAP AWAL DAN BELUM SIAP UNTIK DIGUNAKAN DI DUNIA NYATA**_
+# _**WARNING: UNDONE PROJECT!**_
 
 # PDPlus - Proot Distro Plus
 Hanya sebuah program pendukung yang menambah beberapa koleksi distro Linux yang dapat di pasang pada Android melalui Termux. PDPlus mendukung smartphone dengan akses __*root*__ maupun tidak.
