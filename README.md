@@ -1,10 +1,13 @@
 # _**WARNING: UNDONE PROJECT!**_
 
 # PDPlus - Proot Distro Plus
-Hanya sebuah program pendukung yang menambah beberapa koleksi distro Linux yang dapat di pasang pada Android melalui Termux. PDPlus mendukung smartphone dengan akses __*root*__ maupun tidak.
+PDplus adalah sekumpulan script bash yang bekerja di atas Termux dan bergandengan dengan Proot Distro.
+
+PDplus, dibuat bukan sebagai alternatif Proot Distro, apalagi menjadi penggantinya. Melainkan, PDplus bekerja bersama-sama dengan Proot Distro dan hanya menambah beberapa koleksi distro Linux yang belum ada ddi dalam daftar distro Proot Distro.
 
 # Dependensi
-PDPlus bekerja menggunakan program yang sudah ada termasuk **proot-distro**, **dialog**, dan **wget**. Khusus untuk smartphone yang telah di __*root*__, smartphone tersebut harus sudah terpasang *BusyBox* melalui pemasang modul __*root*__ manager.
+PDplus, karena bekerja bersama dengan Proot Distro, maka, paket _*proot-distro*_, merupakan salah satu dependensi wajib yang harus terpasang pada lingkungan Termux.
 
-_CATATAN!_
-_Script baru dicoba dengan smartphone yang di **root** menggunakan Magisk, dan **BusyBox** yang digunakan, adalah **BusyBox** yang dibuat untuk Magisk. Kami belum mencoba menggunakan **BusyBox** dari repository Termux._
+Selain itu, PDplus juga bekerja menggunakan TUI, sehingga, paket _*dialog*_ atau _*whiptail*_, juga harus terpasang di lingkungan Termux.
+
+PDplus dapat bekerja sebagai pengguna reguler maupun super user menggunakan binari _*su*_ yang dipasang oleh **Magisk** maupun **KernelSU**, yang biasanya terpasang pada folser sistem (/system/bin/su). Karena itulah, paket _*tsu*_ hanya menjadi dependensi opsional saja.
