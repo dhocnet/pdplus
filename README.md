@@ -3,7 +3,7 @@
 # PDPlus - Proot Distro Plus
 PDplus adalah sekumpulan script bash yang bekerja di atas Termux dan bergandengan dengan Proot Distro.
 
-PDplus, dibuat bukan sebagai alternatif Proot Distro, apalagi menjadi penggantinya. Melainkan, PDplus bekerja bersama-sama dengan Proot Distro dan hanya menambah beberapa koleksi distro Linux yang belum ada ddi dalam daftar distro Proot Distro.
+PDplus, dibuat bukan sebagai alternatif Proot Distro, apalagi menjadi penggantinya. Melainkan, PDplus bekerja bersama-sama dengan Proot Distro dan hanya menambah beberapa koleksi distro Linux yang belum ada di dalam daftar distro Proot Distro.
 
 # Dependensi
 PDplus, karena bekerja bersama dengan Proot Distro, maka, paket _*proot-distro*_, merupakan salah satu dependensi wajib yang harus terpasang pada lingkungan Termux.
