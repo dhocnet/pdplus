@@ -71,7 +71,7 @@ function CLEANING_CHROOT() {
   su -c "umount -f $KALI_ROOT/dev"
   su -c "umount $KALI_ROOT/proc"
   su -c "umount $KALI_ROOT/sys"
-  su -c "umount -f $KALI_ROOT/mnt/Disk1"
+  su -c "umount $KALI_ROOT/mnt/Disk1"
   # unmount sdcard if mounted
   # su -c "umount -f $KALI_ROOT/mnt/Disk2"
   
