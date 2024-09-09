@@ -10,4 +10,4 @@ PDplus, karena bekerja bersama dengan Proot Distro, maka, paket _*proot-distro*_
 
 Selain itu, PDplus juga bekerja menggunakan TUI, sehingga, paket _*dialog*_ atau _*whiptail*_, juga harus terpasang di lingkungan Termux.
 
-PDplus dapat bekerja sebagai pengguna reguler maupun super user menggunakan binari _*su*_ yang dipasang oleh **Magisk** maupun **KernelSU**, yang biasanya terpasang pada folser sistem (/system/bin/su). Karena itulah, paket _*tsu*_ hanya menjadi dependensi opsional saja.
+PDplus dapat bekerja sebagai pengguna reguler maupun super user menggunakan binari _*su*_ yang dipasang oleh **Magisk** maupun **KernelSU**, yang biasanya terpasang pada folder sistem (/system/bin/su). Karena itulah, paket _*tsu*_ hanya menjadi dependensi opsional saja.
